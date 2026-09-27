@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopKart - Product Listing</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f9ff;
+            color: #111827;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 16px;
+        }
+
+        .navbar {
+            height: 52px;
+            background: white;
+            border-bottom: 1px solid #dce5f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #111827;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 19px;
+            height: 19px;
+            border-radius: 5px;
+            background: #4f46e5;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .search {
+            width: 310px;
+            height: 27px;
+            border: 1px solid #e1e7ef;
+            border-radius: 5px;
+            padding: 0 10px;
+            font-size: 9px;
+            outline: none;
+        }
+
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 14px;
+        }
+
+        .breadcrumb {
+            padding: 12px 0;
+            font-size: 9px;
+            color: #64748b;
+        }
+
+        .breadcrumb span {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .listing {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 14px;
+        }
+
+        .filters {
+            background: white;
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .filters h3 {
+            font-size: 11px;
+            margin-bottom: 15px;
+            color: #172554;
+        }
+
+        .filter-title {
+            font-size: 9px;
+            font-weight: 700;
+            margin-bottom: 7px;
+            color: #334155;
+        }
+
+        .filter-group {
+            margin-bottom: 16px;
+        }
+
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+            font-size: 8px;
+            color: #64748b;
+        }
+
+        .filter-option input {
+            width: 10px;
+            height: 10px;
+        }
+
+        .price-inputs {
+            display: flex;
+            gap: 4px;
+        }
+
+        .price-inputs input {
+            width: 50%;
+            height: 23px;
+            border: 1px solid #dbe4ef;
+            border-radius: 4px;
+            font-size: 8px;
+            padding: 3px;
+        }
+
+        .apply-btn {
+            width: 100%;
+            height: 27px;
+            border: none;
+            border-radius: 5px;
+            background: #2563eb;
+            color: white;
+            font-size: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .products-area {
+            min-width: 0;
+        }
+
+        .products-header {
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .products-count {
+            font-size: 9px;
+            color: #64748b;
+        }
+
+        .sort {
+            height: 27px;
+            border: 1px solid #dbe4ef;
+            background: white;
+            border-radius: 5px;
+            padding: 0 8px;
+            font-size: 8px;
+            color: #475569;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #dbe4ef;
+            border-radius: 7px;
+            padding: 8px;
+            position: relative;
+            min-width: 0;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 125px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 5px;
+            margin-bottom: 7px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+
+        .badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 7px;
+            font-weight: 700;
+            color: white;
+            padding: 4px 5px;
+            border-radius: 3px;
+            background: #ef4444;
+        }
+
+        .badge.new {
+            background: #10b981;
+        }
+
+        .wishlist {
+            position: absolute;
+            right: 9px;
+            top: 9px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .product-name {
+            font-size: 9px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-size: 10px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .rating {
+            font-size: 8px;
+            color: #f59e0b;
+            margin-bottom: 7px;
+        }
+
+        .rating span {
+            color: #94a3b8;
+        }
+
+        .cart-btn {
+            width: 100%;
+            height: 25px;
+            border: none;
+            border-radius: 4px;
+            background: #2563eb;
+            color: white;
+            font-size: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .info-section {
+            margin-top: 28px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #edf2f7;
+            display: grid;
+            grid-template-columns: 1.6fr 0.8fr 0.8fr;
+            padding: 16px;
+            gap: 20px;
+        }
+
+        .info-section h3 {
+            font-size: 10px;
+            color: #172554;
+            margin-bottom: 10px;
+        }
+
+        .info-section p {
+            font-size: 8px;
+            line-height: 1.8;
+            color: #64748b;
+        }
+
+        .palette {
+            display: flex;
+            gap: 12px;
+        }
+
+        .color-item {
+            text-align: center;
+        }
+
+        .color {
+            width: 23px;
+            height: 23px;
+            border-radius: 50%;
+            margin-bottom: 4px;
+        }
+
+        .color-item small {
+            font-size: 6px;
+            color: #64748b;
+        }
+
+        .blue {
+            background: #2563eb;
+        }
+
+        .red {
+            background: #dc2626;
+        }
+
+        .dark {
+            background: #111827;
+        }
+
+        .gray {
+            background: #687280;
+        }
+
+        .light {
+            background: #f8fafc;
+            border: 1px solid #dbe4ef;
+        }
+
+        .border-color {
+            background: #e5e7eb;
+        }
+
+        .orange {
+            background: #f59e0b;
+        }
+
+        @media (min-width: 1024px) {
+            .navbar {
+                padding: 0 25px;
+            }
+
+            .container {
+                max-width: 1200px;
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .product-image {
+                height: 125px;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .search {
+                width: 190px;
+            }
+
+            .listing {
+                grid-template-columns: 130px 1fr;
+            }
+
+            .filters {
+                padding: 9px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 9px;
+            }
+
+            .product-image {
+                height: 120px;
+            }
+
+            .product-name {
+                font-size: 9px;
+            }
+
+            .info-section {
+                grid-template-columns: 1.5fr 1fr 1fr;
+            }
+
+            .palette {
+                gap: 7px;
+            }
+
+            .color {
+                width: 19px;
+                height: 19px;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .navbar {
+                height: 52px;
+                padding: 0 12px;
+            }
+
+            .search {
+                display: none;
+            }
+
+            .nav-icons {
+                gap: 10px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 0 10px;
+            }
+
+            .breadcrumb {
+                padding: 9px 0;
+            }
+
+            .listing {
+                display: block;
+            }
+
+            .filters {
+                display: none;
+            }
+
+            .products-header {
+                height: 40px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .product-card {
+                padding: 7px;
+            }
+
+            .product-image {
+                height: 145px;
+            }
+
+            .product-name {
+                font-size: 10px;
+            }
+
+            .price {
+                font-size: 11px;
+            }
+
+            .rating {
+                font-size: 8px;
+            }
+
+            .info-section {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">S</div>
+            ShopKart
+        </div>
+
+        <input
+            type="text"
+            class="search"
+            placeholder="Search for products..."
+        >
+
+        <div class="nav-icons">
+            <span>🛒</span>
+            <span>♙</span>
+        </div>
+
+    </nav>
+
+    <main class="container">
+
+        <div class="breadcrumb">
+            <span>Electronics</span>
+            &nbsp;›&nbsp;
+            <span>Laptops</span>
+        </div>
+
+        <section class="listing">
+
+            <aside class="filters">
+
+                <h3>Filters</h3>
+
+                <div class="filter-group">
+
+                    <div class="filter-title">
+                        Category
+                    </div>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Laptops
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Desktops
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Tablets
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Accessories
+                    </label>
+
+                </div>
+
+                <div class="filter-group">
+
+                    <div class="filter-title">
+                        Price Range
+                    </div>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        ₹0 - ₹20,000
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        ₹20,000 - ₹50,000
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        ₹50,000 - ₹75,000
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        ₹75,000+
+                    </label>
+
+                </div>
+
+                <div class="filter-group">
+
+                    <div class="filter-title">
+                        Brand
+                    </div>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Dell
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        HP
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Lenovo
+                    </label>
+
+                    <label class="filter-option">
+                        <input type="checkbox">
+                        Asus
+                    </label>
+
+                </div>
+
+                <button class="apply-btn">
+                    Apply Filters
+                </button>
+
+            </aside>
+
+            <div class="products-area">
+
+                <div class="products-header">
+
+                    <div class="products-count">
+                        Showing 12 results
+                    </div>
+
+                    <select class="sort">
+                        <option>Sort by: Popularity</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                    </select>
+
+                </div>
+
+                <div class="products">
+
+                    <div class="product-card">
+
+                        <span class="badge">SALE</span>
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=500&q=80" alt="Dell Inspiron">
+                        </div>
+
+                        <div class="product-name">
+                            Dell Inspiron 15
+                        </div>
+
+                        <div class="price">
+                            ₹45,990
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★ <span>(128)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                    <div class="product-card">
+
+                        <span class="badge new">NEW</span>
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=80" alt="HP Pavilion">
+                        </div>
+
+                        <div class="product-name">
+                            HP Pavilion
+                        </div>
+
+                        <div class="price">
+                            ₹52,990
+                        </div>
+
+                        <div class="rating">
+                            ★★★★☆ <span>(92)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                    <div class="product-card">
+
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=500&q=80" alt="Lenovo IdeaPad">
+                        </div>
+
+                        <div class="product-name">
+                            Lenovo IdeaPad
+                        </div>
+
+                        <div class="price">
+                            ₹39,990
+                        </div>
+
+                        <div class="rating">
+                            ★★★★☆ <span>(64)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                    <div class="product-card">
+
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=500&q=80" alt="MacBook Air">
+                        </div>
+
+                        <div class="product-name">
+                            MacBook Air M2
+                        </div>
+
+                        <div class="price">
+                            ₹90,470
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★ <span>(83)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                    <div class="product-card">
+
+                        <span class="badge new">NEW</span>
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=500&q=80" alt="ASUS Vivobook">
+                        </div>
+
+                        <div class="product-name">
+                            ASUS Vivobook
+                        </div>
+
+                        <div class="price">
+                            ₹41,990
+                        </div>
+
+                        <div class="rating">
+                            ★★★★☆ <span>(72)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                    <div class="product-card">
+
+                        <span class="wishlist">♡</span>
+
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=500&q=80" alt="Dell XPS">
+                        </div>
+
+                        <div class="product-name">
+                            Dell XPS 13
+                        </div>
+
+                        <div class="price">
+                            ₹75,990
+                        </div>
+
+                        <div class="rating">
+                            ★★★★★ <span>(118)</span>
+                        </div>
+
+                        <button class="cart-btn">
+                            Add to Cart
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="info-section">
+
+            <div>
+
+                <h3>Colour Palette</h3>
+
+                <div class="palette">
+
+                    <div class="color-item">
+                        <div class="color blue"></div>
+                        <small>#2563EB</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color red"></div>
+                        <small>#DC2626</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color dark"></div>
+                        <small>#111827</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color gray"></div>
+                        <small>#687280</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color light"></div>
+                        <small>#F8FAFC</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color border-color"></div>
+                        <small>#E5E7EB</small>
+                    </div>
+
+                    <div class="color-item">
+                        <div class="color orange"></div>
+                        <small>#F59E0B</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3>Typography</h3>
+
+                <p>
+                    Product title: 16px / 600<br>
+                    Price: 20px / 700<br>
+                    Old price: 14px / 400<br>
+                    Category: 13px / 400<br>
+                    Body: 14px / 400
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>Key Layouts</h3>
+
+                <p>
+                    Sidebar: 240px<br>
+                    Products: Grid (3→2→1→4)<br>
+                    Card: Flex (column)<br>
+                    Gap: 24px<br>
+                    Card width: 260px
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

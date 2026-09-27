@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowTask - SaaS Landing Page</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: #f7faff;
+            color: #0f172a;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 24px;
+        }
+
+        .navbar {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e5eaf2;
+            background: white;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #172554;
+        }
+
+        .logo-icon {
+            width: 20px;
+            height: 20px;
+            background: #4656e8;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 11px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .login {
+            color: #172554;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 17px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #4656e8;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #4656e8;
+            border: 1px solid #4656e8;
+        }
+
+        .hero {
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 55px 0;
+            gap: 50px;
+        }
+
+        .hero-content {
+            width: 48%;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #eef2ff;
+            color: #4656e8;
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            line-height: 1.1;
+            color: #172554;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 470px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #64748b;
+            margin-bottom: 22px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dashboard-wrapper {
+            width: 48%;
+            position: relative;
+        }
+
+        .dashboard {
+            width: 100%;
+            height: 275px;
+            background: white;
+            border: 1px solid #dce4f0;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(55, 84, 150, 0.10);
+            padding: 18px;
+        }
+
+        .dashboard-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .dashboard-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #172554;
+        }
+
+        .dashboard-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .dashboard-dots span {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #cbd5e1;
+        }
+
+        .dashboard-body {
+            display: flex;
+            gap: 15px;
+            height: 205px;
+        }
+
+        .sidebar {
+            width: 25%;
+            border-right: 1px solid #edf1f7;
+            padding-right: 10px;
+        }
+
+        .sidebar-item {
+            font-size: 8px;
+            padding: 9px 5px;
+            color: #94a3b8;
+            border-radius: 5px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-item.active {
+            background: #eef2ff;
+            color: #4656e8;
+            font-weight: 600;
+        }
+
+        .chart-area {
+            width: 75%;
+        }
+
+        .chart-title {
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .chart {
+            height: 130px;
+            border: 1px solid #edf1f7;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(#f1f5f9 1px, transparent 1px),
+                linear-gradient(90deg, #f1f5f9 1px, transparent 1px);
+            background-size: 35px 35px;
+        }
+
+        .chart-line {
+            position: absolute;
+            width: 80%;
+            height: 50%;
+            top: 28%;
+            left: 10%;
+            border-bottom: 3px solid #4656e8;
+            transform: skewY(-15deg);
+        }
+
+        .chart-line::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #4656e8;
+            border-radius: 50%;
+            right: 10%;
+            bottom: -5px;
+        }
+
+        .features-section {
+            background: white;
+            padding: 40px 0 55px;
+            border-top: 1px solid #e9eef6;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-heading h2 {
+            font-size: 20px;
+            color: #172554;
+            margin-bottom: 7px;
+        }
+
+        .section-heading p {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            border: 1px solid #e0e7f1;
+            border-radius: 10px;
+            padding: 22px;
+            background: white;
+        }
+
+        .feature-icon {
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            background: #eef2ff;
+            color: #4656e8;
+            font-size: 17px;
+            margin-bottom: 14px;
+        }
+
+        .feature-card h3 {
+            font-size: 13px;
+            color: #172554;
+            margin-bottom: 7px;
+        }
+
+        .feature-card p {
+            font-size: 10px;
+            line-height: 1.6;
+            color: #94a3b8;
+        }
+
+        @media (min-width: 1024px) {
+            .navbar {
+                padding: 0 40px;
+            }
+
+            .hero {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .dashboard {
+                height: 290px;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .navbar {
+                height: 58px;
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .login {
+                font-size: 10px;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 10px;
+            }
+
+            .hero {
+                padding: 40px 20px;
+                gap: 25px;
+            }
+
+            .hero-content {
+                width: 48%;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 11px;
+            }
+
+            .dashboard-wrapper {
+                width: 52%;
+            }
+
+            .dashboard {
+                height: 235px;
+                padding: 12px;
+            }
+
+            .dashboard-body {
+                height: 180px;
+            }
+
+            .sidebar {
+                width: 23%;
+            }
+
+            .chart-area {
+                width: 77%;
+            }
+
+            .features-section {
+                padding: 30px 20px 40px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 14px;
+            }
+
+            .feature-card {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .navbar {
+                height: 58px;
+                padding: 0 16px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .login {
+                display: none;
+            }
+
+            .nav-buttons {
+                gap: 0;
+            }
+
+            .btn {
+                padding: 8px 12px;
+                font-size: 9px;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 30px 16px;
+                gap: 30px;
+            }
+
+            .hero-content {
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 27px;
+                line-height: 1.15;
+            }
+
+            .hero p {
+                font-size: 11px;
+                max-width: 100%;
+            }
+
+            .hero-buttons {
+                gap: 8px;
+            }
+
+            .dashboard-wrapper {
+                width: 100%;
+            }
+
+            .dashboard {
+                height: 230px;
+                padding: 12px;
+            }
+
+            .dashboard-body {
+                height: 175px;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .chart-area {
+                width: 100%;
+            }
+
+            .features-section {
+                padding: 30px 16px 40px;
+            }
+
+            .section-heading {
+                margin-bottom: 20px;
+            }
+
+            .section-heading h2 {
+                font-size: 18px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feature-card {
+                padding: 16px;
+            }
+
+            .feature-card h3 {
+                font-size: 12px;
+            }
+
+            .feature-card p {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">✦</div>
+            FlowTask
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Docs</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <span class="login">Login</span>
+            <button class="btn btn-primary">Get Started</button>
+        </div>
+
+    </nav>
+
+    <main>
+
+        <section class="hero container">
+
+            <div class="hero-content">
+
+                <span class="badge">
+                    Built Smarter
+                </span>
+
+                <h1>
+                    Build Better Products<br>
+                    Faster With Our Platform
+                </h1>
+
+                <p>
+                    Streamline your workflow, collaborate with your team
+                    and ship great products faster with our all-in-one platform.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="btn btn-primary">
+                        Get Started
+                    </button>
+
+                    <button class="btn btn-secondary">
+                        View Demo
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-wrapper">
+
+                <div class="dashboard">
+
+                    <div class="dashboard-top">
+
+                        <div class="dashboard-title">
+                            Overview
+                        </div>
+
+                        <div class="dashboard-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                    <div class="dashboard-body">
+
+                        <div class="sidebar">
+
+                            <div class="sidebar-item active">
+                                Dashboard
+                            </div>
+
+                            <div class="sidebar-item">
+                                Analytics
+                            </div>
+
+                            <div class="sidebar-item">
+                                Projects
+                            </div>
+
+                            <div class="sidebar-item">
+                                Team
+                            </div>
+
+                            <div class="sidebar-item">
+                                Settings
+                            </div>
+
+                        </div>
+
+                        <div class="chart-area">
+
+                            <div class="chart-title">
+                                Project Analytics
+                            </div>
+
+                            <div class="chart">
+                                <div class="chart-line"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="features-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Powerful Features
+                    </h2>
+
+                    <p>
+                        Everything you need to build, manage and grow your product.
+                    </p>
+
+                </div>
+
+                <div class="features">
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚡
+                        </div>
+
+                        <h3>
+                            Fast & Reliable
+                        </h3>
+
+                        <p>
+                            Experience blazing fast performance with
+                            our powerful platform.
+                        </p>
+
+                    </div>
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            👥
+                        </div>
+
+                        <h3>
+                            Team Collaboration
+                        </h3>
+
+                        <p>
+                            Work together seamlessly with your
+                            real-time updates.
+                        </p>
+
+                    </div>
+
+                    <div class="feature-card">
+
+                        <div class="feature-icon">
+                            🛡
+                        </div>
+
+                        <h3>
+                            Secure by Design
+                        </h3>
+
+                        <p>
+                            Your data is always protected with
+                            enterprise-grade security.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

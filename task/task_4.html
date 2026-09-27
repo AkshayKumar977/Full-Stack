@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GLA University - Tech Summit 2026</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f9ff;
+            color: #172554;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 14px;
+        }
+
+        .navbar {
+            height: 54px;
+            background: white;
+            border-bottom: 1px solid #dce5ef;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #14532d;
+        }
+
+        .logo-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #047857;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 8px;
+            color: #475569;
+        }
+
+        .register-nav {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 8px;
+            font-weight: 600;
+        }
+
+        .hero {
+            height: 280px;
+            position: relative;
+            background-image:
+                linear-gradient(rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.58)),
+                url("https://images.unsplash.com/photo-1564981797816-1043664bf78d?auto=format&fit=crop&w=1400&q=80");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-badge {
+            background: #2563eb;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 8px;
+            margin-bottom: 12px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 9px 15px;
+            border-radius: 5px;
+            font-size: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            border: 1px solid #4f46e5;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+
+        .section {
+            background: white;
+            padding: 15px 0;
+        }
+
+        .section-title {
+            font-size: 13px;
+            color: #172554;
+            margin-bottom: 10px;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 9px;
+        }
+
+        .detail-card {
+            border: 1px solid #dbe5f0;
+            border-radius: 6px;
+            padding: 11px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .detail-icon {
+            width: 25px;
+            height: 25px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .detail-label {
+            font-size: 7px;
+            color: #64748b;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-size: 9px;
+            font-weight: 600;
+            color: #172554;
+        }
+
+        .detail-extra {
+            font-size: 7px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        .speakers-section {
+            padding: 15px 0;
+            background: white;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .view-all {
+            color: #2563eb;
+            font-size: 7px;
+        }
+
+        .speakers {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .speaker-card {
+            text-align: center;
+            border-right: 1px solid #e5eaf0;
+            padding: 5px;
+        }
+
+        .speaker-image {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 6px;
+        }
+
+        .speaker-name {
+            font-size: 8px;
+            font-weight: 600;
+            color: #172554;
+            margin-bottom: 3px;
+        }
+
+        .speaker-role {
+            font-size: 6px;
+            color: #64748b;
+            line-height: 1.4;
+        }
+
+        .schedule-section {
+            background: white;
+            padding: 10px 0 20px;
+        }
+
+        .schedule {
+            width: 100%;
+            border: 1px solid #e1e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .schedule-row {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            min-height: 23px;
+            border-bottom: 1px solid #edf2f7;
+            align-items: center;
+        }
+
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-row div {
+            padding: 5px 8px;
+            font-size: 7px;
+            color: #64748b;
+        }
+
+        .schedule-row .time {
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .bottom-info {
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #edf2f7;
+            padding: 14px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-title {
+            font-size: 9px;
+            color: #172554;
+            margin-bottom: 9px;
+        }
+
+        .palette {
+            display: flex;
+            gap: 10px;
+        }
+
+        .palette-item {
+            text-align: center;
+        }
+
+        .palette-color {
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            margin-bottom: 3px;
+        }
+
+        .palette-item small {
+            font-size: 5px;
+            color: #64748b;
+        }
+
+        .primary {
+            background: #0f172a;
+        }
+
+        .secondary {
+            background: #2563eb;
+        }
+
+        .accent {
+            background: #7c3aed;
+        }
+
+        .success {
+            background: #059669;
+        }
+
+        .background {
+            background: #f0fdf4;
+            border: 1px solid #dbe5ef;
+        }
+
+        .border {
+            background: #cbd5e1;
+        }
+
+        .white {
+            background: white;
+            border: 1px solid #dbe5ef;
+        }
+
+        .info-text {
+            font-size: 7px;
+            line-height: 1.8;
+            color: #64748b;
+        }
+
+        @media (min-width: 1024px) {
+            .hero {
+                height: 280px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .event-details {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .speakers {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .navbar {
+                height: 52px;
+                padding: 0 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero {
+                height: 235px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-subtitle {
+                font-size: 10px;
+            }
+
+            .event-details {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .detail-card {
+                padding: 8px;
+            }
+
+            .speakers {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .speaker-image {
+                width: 45px;
+                height: 45px;
+            }
+
+            .bottom-info {
+                grid-template-columns: 1.4fr 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 639px) {
+            .container {
+                padding: 0 9px;
+            }
+
+            .navbar {
+                height: 50px;
+                padding: 0 10px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .register-nav {
+                display: none;
+            }
+
+            .navbar::after {
+                content: "☰";
+                font-size: 14px;
+                color: #334155;
+            }
+
+            .hero {
+                height: 205px;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero-subtitle {
+                font-size: 9px;
+                margin-bottom: 13px;
+            }
+
+            .hero-badge {
+                font-size: 6px;
+                padding: 5px 9px;
+            }
+
+            .btn {
+                padding: 7px 11px;
+                font-size: 7px;
+            }
+
+            .section {
+                padding: 12px 0;
+            }
+
+            .section-title {
+                font-size: 12px;
+            }
+
+            .event-details {
+                grid-template-columns: 1fr;
+                gap: 7px;
+            }
+
+            .detail-card {
+                padding: 9px;
+            }
+
+            .speakers {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .speaker-card {
+                border-bottom: 1px solid #e5eaf0;
+                border-right: none;
+                padding-bottom: 10px;
+            }
+
+            .speaker-image {
+                width: 48px;
+                height: 48px;
+            }
+
+            .schedule-section {
+                display: none;
+            }
+
+            .bottom-info {
+                display: none;
+            }
+
+            .speaker-name {
+                font-size: 7px;
+            }
+
+            .speaker-role {
+                font-size: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">✿</div>
+            GLA University
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <button class="register-nav">
+            Register Now
+        </button>
+
+    </header>
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="hero-badge">
+                    Tech • Learn • Connect
+                </div>
+
+                <h1>
+                    TECH SUMMIT 2026
+                </h1>
+
+                <p class="hero-subtitle">
+                    Innovating the Future of Technology
+                </p>
+
+                <div class="hero-buttons">
+
+                    <button class="btn btn-primary">
+                        Register Now
+                    </button>
+
+                    <button class="btn btn-outline">
+                        View Schedule
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <div class="container">
+
+                <h2 class="section-title">
+                    Event Details
+                </h2>
+
+                <div class="event-details">
+
+                    <div class="detail-card">
+
+                        <div class="detail-icon">
+                            ▣
+                        </div>
+
+                        <div>
+                            <div class="detail-label">
+                                Date
+                            </div>
+
+                            <div class="detail-value">
+                                15 Oct 2026
+                            </div>
+
+                            <div class="detail-extra">
+                                Friday
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="detail-card">
+
+                        <div class="detail-icon">
+                            ◉
+                        </div>
+
+                        <div>
+                            <div class="detail-label">
+                                Venue
+                            </div>
+
+                            <div class="detail-value">
+                                GLA University
+                            </div>
+
+                            <div class="detail-extra">
+                                Mathura
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="detail-card">
+
+                        <div class="detail-icon">
+                            ♙
+                        </div>
+
+                        <div>
+                            <div class="detail-label">
+                                Speakers
+                            </div>
+
+                            <div class="detail-value">
+                                25+
+                            </div>
+
+                            <div class="detail-extra">
+                                Industry Experts
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="speakers-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <h2 class="section-title">
+                        Featured Speakers
+                    </h2>
+
+                    <span class="view-all">
+                        View all →
+                    </span>
+
+                </div>
+
+                <div class="speakers">
+
+                    <div class="speaker-card">
+
+                        <img
+                            class="speaker-image"
+                            src="https://randomuser.me/api/portraits/women/44.jpg"
+                            alt="Speaker"
+                        >
+
+                        <div class="speaker-name">
+                            Dr. Ananya Sharma
+                        </div>
+
+                        <div class="speaker-role">
+                            AI Researcher
+                        </div>
+
+                    </div>
+
+                    <div class="speaker-card">
+
+                        <img
+                            class="speaker-image"
+                            src="https://randomuser.me/api/portraits/men/32.jpg"
+                            alt="Speaker"
+                        >
+
+                        <div class="speaker-name">
+                            Rahul Mehta
+                        </div>
+
+                        <div class="speaker-role">
+                            CTO, TechCorp
+                        </div>
+
+                    </div>
+
+                    <div class="speaker-card">
+
+                        <img
+                            class="speaker-image"
+                            src="https://randomuser.me/api/portraits/women/68.jpg"
+                            alt="Speaker"
+                        >
+
+                        <div class="speaker-name">
+                            Priya Nair
+                        </div>
+
+                        <div class="speaker-role">
+                            Product Lead
+                        </div>
+
+                    </div>
+
+                    <div class="speaker-card">
+
+                        <img
+                            class="speaker-image"
+                            src="https://randomuser.me/api/portraits/men/45.jpg"
+                            alt="Speaker"
+                        >
+
+                        <div class="speaker-name">
+                            Vikram Singh
+                        </div>
+
+                        <div class="speaker-role">
+                            Cloud Architect
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="schedule-section">
+
+            <div class="container">
+
+                <h2 class="section-title">
+                    Event Schedule
+                </h2>
+
+                <div class="schedule">
+
+                    <div class="schedule-row">
+                        <div class="time">10:00</div>
+                        <div>Opening Ceremony</div>
+                    </div>
+
+                    <div class="schedule-row">
+                        <div class="time">11:00</div>
+                        <div>AI & Future</div>
+                    </div>
+
+                    <div class="schedule-row">
+                        <div class="time">12:30</div>
+                        <div>Lunch</div>
+                    </div>
+
+                    <div class="schedule-row">
+                        <div class="time">02:00</div>
+                        <div>Cloud Computing</div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="bottom-info container">
+
+            <div>
+
+                <h3 class="info-title">
+                    Colour Palette
+                </h3>
+
+                <div class="palette">
+
+                    <div class="palette-item">
+                        <div class="palette-color primary"></div>
+                        <small>#0F172A</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color secondary"></div>
+                        <small>#2563EB</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color accent"></div>
+                        <small>#7C3AED</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color success"></div>
+                        <small>#059669</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color background"></div>
+                        <small>#F0FAFC</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color border"></div>
+                        <small>#CBD5E1</small>
+                    </div>
+
+                    <div class="palette-item">
+                        <div class="palette-color white"></div>
+                        <small>#FFFFFF</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div>
+
+                <h3 class="info-title">
+                    Typography (Inter)
+                </h3>
+
+                <p class="info-text">
+                    Hero heading: 56px / 700<br>
+                    Section heading: 32px / 700<br>
+                    Speaker name: 16px / 600<br>
+                    Body: 16px / 400<br>
+                    Nav: 16px / 500
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3 class="info-title">
+                    Key Layouts
+                </h3>
+
+                <p class="info-text">
+                    Hero: Flex (center)<br>
+                    Details: Grid (3→1)<br>
+                    Speakers: Grid (4→2→1)<br>
+                    Schedule: Grid (120px 1fr)<br>
+                    Max width: 1200px
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
